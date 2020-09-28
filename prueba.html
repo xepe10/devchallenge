@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body style="padding-left: 25px;padding-right: 25px;">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<script>
+
+        const esPrimo = numero => {            
+            if (numero == 0 || numero == 1 || numero == 4) return false;
+            for (let x = 2; x < numero / 2; x++) {
+                if (numero % x == 0) return false;
+            }            
+            return true;
+        }        
+
+        const Evaluar = () => {          
+            
+            let numero = 0              
+            let numeroEncontrado = 0              
+            let segundoWhile = 0  
+            let arrayPrimos = []  
+            let numeroValue = document.getElementById("Numero").value            
+            let bodyTable = document.getElementById("bodyTable")
+            let Resultado = document.getElementById("resultado")
+            let bodyTablePrimos = document.getElementById("bodyTablePrimos")
+
+            if (numeroValue == ""){
+                alert("Porfavor ingrese un numero")
+            return
+                }
+            
+            let acumulador = 0
+
+            while (numero <= numeroValue) {                               
+
+                if (esPrimo(numero)){                          
+                    arrayPrimos.push(numero)                    
+                    bodyTablePrimos.innerHTML = bodyTablePrimos.innerHTML + `<tr><th>${numero}</th><td>` 
+                }
+                numero ++                                
+            }
+            
+            acumulador = 0
+            while (acumulador < numeroValue) {                
+
+                bodyTable.innerHTML = bodyTable.innerHTML + `<tr><th scope='row'>${segundoWhile}</th><td>${arrayPrimos[segundoWhile]}</td><td>${acumulador}</td></tr>` 
+                
+                acumulador = acumulador + arrayPrimos[segundoWhile]
+                
+                if (!(arrayPrimos.find(element => element == acumulador) == undefined)){
+                    numeroEncontrado = acumulador
+                }
+                segundoWhile++
+                                
+            }
+            Resultado.style = "display: inline"
+            Resultado.innerHTML = "<h4>El numero primo consecutivo que tiene la suma mas larga de numero primos consecutivos es " + numeroEncontrado +" </h4>"            
+        }
+</script>
+
+<h1>Prueba</h1>
+
+<input type="number" name="Digito" id="Numero">
+<button onclick="Evaluar()">Evaluar</button>
+<div id= "resultado" style="display: none;"></div>
+
+
+<div style="margin-top: 20px;">
+
+   <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">MOSTRAR NUMEROS PRIMOS</a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="true" aria-controls="multiCollapseExample2">MOSTRAR TABLA DE RESULTADO</button>    
+  </p>
+  <div class="row">
+    <div class="col">
+      <div class="collapse.show multi-collapse" id="multiCollapseExample1">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <thead>
+                  <tr>        
+                    <th scope="col">NUMERO PRIMO</th>        
+                  </tr>
+                </thead>
+                <tbody id="bodyTablePrimos">
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="collapse.show multi-collapse" id="multiCollapseExample2">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NUMERO PRIMO</th>
+                    <th scope="col">ACUMULADOR</th>        
+                  </tr>
+                </thead>
+                <tbody id="bodyTable">
+                </tbody>
+              </table>            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
