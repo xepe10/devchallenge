@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script>
+            window.onload = () => {
+                let elem_result = document.getElementById("result");
+                prime = findPrime(1000000)
+                elem_result.append(prime);
+            };
+        </script>
+    </head>
+    <body>
+        <h1>Primo con suma más larga  de primos</h1>
+        <p>
+            Es la suma más larga de números primos consecutivos que da un primo por debajo de 1000000.
+            
+        </p>
+        <p>
+            El primo es:
+            <em id="result"></em>
+        </p>
+    </body>
+</html>
