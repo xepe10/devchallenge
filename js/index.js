@@ -23,7 +23,7 @@ const calcular = () => {
                         primos.push(i);
                         suma = primos.reduce((a, b) => a + b, 0);
                         
-                        if(suma>=numInicial){
+                        if(suma>numInicial){
                             primos.pop();
                             $("#resultado1").html("");
                             //console.log(primos);
@@ -47,6 +47,30 @@ const calcular = () => {
                             }
                             //console.log(totalElementos);
                             clearInterval(refreshIntervalId);
+                        }
+                        if(suma==numInicial){
+                            $("#resultado1").html("");
+                            //console.log(primos);
+                            let totalElementos = primos.length;
+                            suma = primos.reduce((a, b) => a + b, 0);
+                            //console.log(totalElementos);
+                            $("#resultado1").append("Sumatoria mas grande de primos en la secuencia: " + suma+"<br>");
+                            let k = 0;
+                            for(k=0; k <= totalElementos; k++){ 
+                                if(isPrime(suma)){
+                                    //console.log("Iteracion: "+totalElementos +"Suma: " +suma);
+                                    $("#resultado3").html("Num. Primo mayor en la secuencia (Por sumatoria de primos): " + suma+"<i class='fa fa-check' aria-hidden='true' style='color:green;'></i><br>");
+                                    break;
+                                }
+                                else{
+                                    primos.pop();
+                                    suma = primos.reduce((a, b) => a + b, 0);
+                                    totalElementos = primos.length;
+                                }
+                                //console.log(k);
+                            }
+                            //console.log(totalElementos);
+                            clearInterval(refreshIntervalId);                            
                         }
                         else{
                             $("#resultado2").append("Num. Primo agregado: " + i+"<br>");
